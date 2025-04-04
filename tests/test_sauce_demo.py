@@ -7,7 +7,6 @@ import data.checkout as data_checkout
 import data.config as data_config
 from data.product import PRODUCTS, TEST_CASES
 
-@pytest.mark.usefixtures('login')
 def test_login(login):
     product = Product(login)
     assert login.current_url   == data_config.INVENTORY_URL
