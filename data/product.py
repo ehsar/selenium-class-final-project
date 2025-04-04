@@ -25,7 +25,7 @@ PRODUCTS: Dict[str, Product] = {
     )
 }
 
-TEST_CASES = [
+PRODUCT_TEST_CASES = [
     {
         'name'                  : 'Add two products then remove one',
         'products_to_add'       : ['backpack', 'bike_light'],
