@@ -26,6 +26,11 @@ class Checkout():
         total = self.driver.find_elements(By.XPATH, Locator.LIST_ITEM_CART_XPATH)
 
         return len(total)
+    
+    def get_error_message(self):
+        message = self.driver.find_element(By.XPATH, Locator.ERROR_MESSAGE_XPATH).text
+
+        return message
 
     def enter_information_credentials(self, first_name, last_name, postal_code):
         self.driver.find_element(By.ID, Locator.FIRST_NAME_TEXTBOX_ID).send_keys(first_name)

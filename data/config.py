@@ -10,5 +10,8 @@ CHECKOUT_OVERVIEW_TITLE         = 'Checkout: Overview'
 CHECKOUT_THANKYOU_TITLE         = 'Thank you for your order!'
 
 # MESSAGE
-INVALID_USER_MESSAGE    = 'Epic sadface: Username and password do not match any user in this service'
-LOCKED_OUT_USER_MESSAGE = 'Epic sadface: Sorry, this user has been locked out.'
+INVALID_USER_MESSAGE         = 'Epic sadface: Username and password do not match any user in this service'
+LOCKED_OUT_USER_MESSAGE      = 'Epic sadface: Sorry, this user has been locked out.'
+FIRST_NAME_REQUIRED_MESSAGE  = 'Error: First Name is required'
+LAST_NAME_REQUIRED_MESSAGE   = 'Error: Last Name is required'
+POSTAL_CODE_REQUIRED_MESSAGE = 'Error: Postal Code is required'

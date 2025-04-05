@@ -4,6 +4,7 @@ class Locator:
     CHECKOUT_BUTTON_XPATH     = '//button[@class="btn btn_action btn_medium checkout_button "]'
     LIST_ITEM_CART_XPATH      = '//div[@class="cart_item"]'
     COMPLETE_HEADER_XPATH     = '//h2[@class="complete-header"]'
+    ERROR_MESSAGE_XPATH       = '//div[@class="error-message-container error"]/h3[@data-test="error"]' 
 
     FIRST_NAME_TEXTBOX_ID  = 'first-name'
     LAST_NAME_TEXTBOX_ID   = 'last-name'

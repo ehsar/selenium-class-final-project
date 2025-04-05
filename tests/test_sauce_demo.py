@@ -7,6 +7,7 @@ import data.checkout as data_checkout
 import data.config as data_config
 from data.product import PRODUCTS, PRODUCT_TEST_CASES
 from data.login import USERS, LOGIN_TEST_CASES
+from data.checkout import INFORMATIONS, INFORMATION_TEST_CASES
 
 @pytest.mark.parametrize('case', LOGIN_TEST_CASES, ids=[tc['name'] for tc in LOGIN_TEST_CASES])
 def test_login(driver, case):
@@ -42,25 +43,40 @@ def test_add_and_remove_from_cart(driver, case):
         product.click_remove_from_cart(product_data.slug)
         assert checkout.get_shopping_cart_badge() == case['expected_counts'][i]
 
-def test_checkout_process(driver):
+def test_checkout_shopping_cart(driver):
     checkout = Checkout(driver)
-    
+
     checkout.click_shopping_cart()
-    assert checkout.get_title() == data_config.CHECKOUT_YOUR_CART_TITLE
-    
+    assert checkout.get_title()           == data_config.CHECKOUT_YOUR_CART_TITLE
+    assert checkout.get_total_cart_item() == 2
+
     checkout.click_checkout()
     assert checkout.get_title() == data_config.CHECKOUT_YOUR_INFORMATION_TITLE
+
+@pytest.mark.parametrize('case', INFORMATION_TEST_CASES, ids=[tc['name'] for tc in INFORMATION_TEST_CASES])
+def test_checkout_information(driver, case):
+    checkout         = Checkout(driver)
+    information_data = INFORMATIONS[case['information_key']]
     
+    # Clear state
+    driver.get(driver.current_url)
+
     checkout.enter_information_credentials(
-        data_checkout.INFORMATION['first_name'],
-        data_checkout.INFORMATION['last_name'],
-        data_checkout.INFORMATION['postal_code']
+        information_data.first_name,
+        information_data.last_name,
+        information_data.postal_code
     )
     checkout.click_continue()
     
-    assert checkout.get_title()           == data_config.CHECKOUT_OVERVIEW_TITLE
-    assert checkout.get_total_cart_item() == 2
-    
+    if information_data.expected_result == 'success':
+        assert checkout.get_title()           == case['expected_result']
+        assert checkout.get_total_cart_item() == 2
+    else:
+        assert checkout.get_error_message() == case['expected_result']
+
+def test_checkout_finish(driver):
+    checkout = Checkout(driver)
+
     checkout.click_finish()
     assert checkout.get_complete_header() == data_config.CHECKOUT_THANKYOU_TITLE
 
